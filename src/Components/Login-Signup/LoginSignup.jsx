@@ -52,8 +52,11 @@ const LoginSignup = () => {
   };
 
   return (
+  
+  
     <div className="container">
       <div className="header">
+       
         <div className="text">Login Page</div>
         <div className="underline"> </div>
 
@@ -116,6 +119,7 @@ const LoginSignup = () => {
        
       </div>
     </div>
+    
   );
 };
 

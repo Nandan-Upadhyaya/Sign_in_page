@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.NavBar{
+  background-color: #fefefe;
+  text-align:center;
+  height : 100%;
+  width: 100%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
