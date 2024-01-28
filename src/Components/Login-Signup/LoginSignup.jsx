@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import './LoginSignup.css'
-import user_icon from '../Assets/person.png'
-import email_icon from '../Assets/email.png'
-import password_icon from '../Assets/password.png'
+import "./LoginSignup.css";
+import user_icon from "../Assets/person.png";
+import email_icon from "../Assets/email.png";
+import password_icon from "../Assets/password.png";
 
 const LoginSignup = () => {
   const initialValues = { Name: "", Email: "", Password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
- 
+  const [scrollDirection, setScrollDirection] = useState("down");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,8 +21,6 @@ const LoginSignup = () => {
     const errors = validate(formValues);
     setFormErrors(errors);
     setIsSubmit(true);
-
-   
   };
 
   useEffect(() => {
@@ -31,6 +29,37 @@ const LoginSignup = () => {
       console.log(formValues);
     }
   }, [formErrors, isSubmit]);
+
+  useEffect(() => {
+    let timer;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Check if scrolling up or down
+      if (currentScrollY > scrollY.current) {
+        setScrollDirection("down");
+      } else {
+        setScrollDirection("up");
+      }
+
+      document.body.classList.add("scrolling");
+      clearTimeout(timer);
+
+      timer = setTimeout(() => {
+        document.body.classList.remove("scrolling");
+      }, 200);
+    };
+
+    const scrollY = { current: window.scrollY };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
+  }, []);
 
   const validate = (values) => {
     const errors = {};
@@ -52,13 +81,10 @@ const LoginSignup = () => {
   };
 
   return (
-  
-  
     <div className="container">
       <div className="header">
-       
         <div className="text">Login Page</div>
-        <div className="underline"> </div>
+        <div className="underline"></div>
 
         <form onSubmit={handleSubmit}>
           <div className="inputs">
@@ -103,23 +129,25 @@ const LoginSignup = () => {
           </div>
 
           <div className="forgot-password">
-            Lost Password? <span>Click Here</span>
+            Forgot Password? <span>Click Here</span>
+          </div>
+          <div className="forgot-password">
+            Already have an Account? <span>Sign Up now!</span>
           </div>
 
           <div className="submit-container">
-          {/*  <button type="submit" className="submit">
-              Sign Up
-  </button> */}
             <button type="submit" className="submit">
               Log in
             </button>
           </div>
         </form>
-
-       
+        {scrollDirection === "down" && (
+          <footer>
+            2024 @FreeFlowLearning. All Rights Reserved.
+          </footer>
+        )}
       </div>
     </div>
-    
   );
 };
 

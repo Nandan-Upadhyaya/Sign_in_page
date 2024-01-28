@@ -6,8 +6,10 @@ export const NavBar = () => {
     const [MenuOpen , setMenuOpen] = useState(false);
 return (
 <nav>
+    <div  className="centred_title">
     <Link to = "/" className='title'> FreeFlow Learning <img src = {image} alt = "Logo" className='image'/>
     </Link>
+    </div>
     <div className='Menu' onClick={() => {
         setMenuOpen(!MenuOpen);
     }}>
@@ -27,9 +29,7 @@ return (
         <NavLink to = "/contact"> Contact</NavLink>
 
         </li>
-        <li>
-            <button className='Login'> Login</button>
-        </li>
+       
         <li>
         <button className='Login'> Sign Up</button>
         </li>
